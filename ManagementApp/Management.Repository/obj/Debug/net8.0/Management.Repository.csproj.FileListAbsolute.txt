@@ -1,0 +1,15 @@
+C:\Users\balie\source\repos\FinalAssesment\ManagementApp\Management.Repository\bin\Debug\net8.0\Management.Repository.deps.json
+C:\Users\balie\source\repos\FinalAssesment\ManagementApp\Management.Repository\bin\Debug\net8.0\Management.Repository.runtimeconfig.json
+C:\Users\balie\source\repos\FinalAssesment\ManagementApp\Management.Repository\bin\Debug\net8.0\Management.Repository.dll
+C:\Users\balie\source\repos\FinalAssesment\ManagementApp\Management.Repository\bin\Debug\net8.0\Management.Repository.pdb
+C:\Users\balie\source\repos\FinalAssesment\ManagementApp\Management.Repository\obj\Debug\net8.0\Management.Repository.csproj.AssemblyReference.cache
+C:\Users\balie\source\repos\FinalAssesment\ManagementApp\Management.Repository\obj\Debug\net8.0\Management.Repository.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\balie\source\repos\FinalAssesment\ManagementApp\Management.Repository\obj\Debug\net8.0\Management.Repository.AssemblyInfoInputs.cache
+C:\Users\balie\source\repos\FinalAssesment\ManagementApp\Management.Repository\obj\Debug\net8.0\Management.Repository.AssemblyInfo.cs
+C:\Users\balie\source\repos\FinalAssesment\ManagementApp\Management.Repository\obj\Debug\net8.0\Management.Repository.csproj.CoreCompileInputs.cache
+C:\Users\balie\source\repos\FinalAssesment\ManagementApp\Management.Repository\obj\Debug\net8.0\Management.Repository.sourcelink.json
+C:\Users\balie\source\repos\FinalAssesment\ManagementApp\Management.Repository\obj\Debug\net8.0\Management.Repository.dll
+C:\Users\balie\source\repos\FinalAssesment\ManagementApp\Management.Repository\obj\Debug\net8.0\refint\Management.Repository.dll
+C:\Users\balie\source\repos\FinalAssesment\ManagementApp\Management.Repository\obj\Debug\net8.0\Management.Repository.pdb
+C:\Users\balie\source\repos\FinalAssesment\ManagementApp\Management.Repository\obj\Debug\net8.0\Management.Repository.genruntimeconfig.cache
+C:\Users\balie\source\repos\FinalAssesment\ManagementApp\Management.Repository\obj\Debug\net8.0\ref\Management.Repository.dll

@@ -1,4 +1,5 @@
-﻿using Management.Repository.Repositories;
+﻿using Management.Repository.Models;
+using Management.Repository.Repositories;
 using Management.Service.Dtos;
 using System;
 using System.Collections.Generic;
@@ -23,9 +24,10 @@ namespace Management.Service.Services
             var apartmentDtos = apartments.Select(p => new ApartmentDto
             {
                 Id = p.Id,
-                BlokNo=p.BlokNo,
-                Floor=p.Floor,
-                DoorNo=p.DoorNo 
+                BlokNo = p.BlokNo,
+                Floor = p.Floor,
+                DoorNo = p.DoorNo,
+                AppUserId = p.AppUserId
 
 
             }).ToList();
@@ -35,18 +37,98 @@ namespace Management.Service.Services
                 Data = apartmentDtos
             };
         }
-        public async Task<ResponseDto<List<ApartmentDto>>> AddApartment(ApartmentDto apartmentDto)
+
+        public async Task<ResponseDto<List<ApartmentDto>>> GetApartmentByUserId(Guid userId)
         {
-           var newApartment = new ApartmentDto
-           {
-                Id = Guid.NewGuid(),
-                BlokNo = apartmentDto.BlokNo,
-                Floor = apartmentDto.Floor,
-                DoorNo = apartmentDto.DoorNo
+            var apartment = await _apartmentRepository.GetApartmentByUserId(userId);
+            return new ResponseDto<List<ApartmentDto>>
+            {
+                Data = new List<ApartmentDto>
+                {
+                    new ApartmentDto
+                    {
+                        Id = apartment.Id,
+                        BlokNo = apartment.BlokNo,
+                        Floor = apartment.Floor,
+                        DoorNo = apartment.DoorNo,
+                        AppUserId = apartment.AppUserId
+                    }
+                }
             };
-            return new ResponseDto<List<ApartmentDto>> { Data = new List<ApartmentDto> { newApartment } };
+            
         }
 
+        public async Task<ResponseDto<ApartmentDto>> AddApartment(ApartmentDto apartmentDto)
+        {
+           var apartment = new Apartment // This is so wrong. I should use AutoMapper to map the ApartmentDto to Apartment
+           {
+                Id = apartmentDto.Id,
+                BlokNo = apartmentDto.BlokNo,
+                Floor = apartmentDto.Floor,
+                DoorNo = apartmentDto.DoorNo,
+                AppUserId = apartmentDto.AppUserId
+            };
 
+            return new ResponseDto<ApartmentDto>
+            {
+                Data = new ApartmentDto
+                {
+                    Id = apartment.Id,
+                    BlokNo = apartment.BlokNo,
+                    Floor = apartment.Floor,
+                    DoorNo = apartment.DoorNo,
+                    AppUserId = apartment.AppUserId
+                }
+            };
+
+        }
+
+        public async Task<ResponseDto<bool>> DeleteApartment(Guid id)
+        {
+            return new ResponseDto<bool>
+            {
+                Data = await _apartmentRepository.DeleteApartment(id)
+            };
+        }
+
+        public async Task<ResponseDto<ApartmentDto>> GetById(Guid id)
+        {
+          var apartment = await _apartmentRepository.GetApartmentById(id);
+            return new ResponseDto<ApartmentDto>
+            {
+                Data = new ApartmentDto
+                {
+                    Id = apartment.Id,
+                    BlokNo = apartment.BlokNo,
+                    Floor = apartment.Floor,
+                    DoorNo = apartment.DoorNo,
+                    AppUserId = apartment.AppUserId
+                }
+            };
+        }
+
+        public async Task<ResponseDto<ApartmentDto>> UpdateApartment(Guid id, ApartmentDto apartmentDto)
+        {
+           var apartment = new Apartment // This is so wrong. I should use AutoMapper to map the ApartmentDto to Apartment
+           {
+                Id = apartmentDto.Id,
+                BlokNo = apartmentDto.BlokNo,
+                Floor = apartmentDto.Floor,
+                DoorNo = apartmentDto.DoorNo,
+                AppUserId = apartmentDto.AppUserId
+            };
+
+            return new ResponseDto<ApartmentDto>
+            {
+                Data = new ApartmentDto
+                {
+                    Id = apartment.Id,
+                    BlokNo = apartment.BlokNo,
+                    Floor = apartment.Floor,
+                    DoorNo = apartment.DoorNo,
+                    AppUserId = apartment.AppUserId
+                }
+            };
+        }
     }
 }

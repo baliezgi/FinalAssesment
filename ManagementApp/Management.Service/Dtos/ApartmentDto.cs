@@ -12,6 +12,7 @@ namespace Management.Service.Dtos
         public int BlokNo { get; set; }
         public int Floor { get; set; }
         public int DoorNo { get; set; }
+        public Guid AppUserId { get; set; }
 
     }
 }

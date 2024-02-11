@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("TokenAuth")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+995bccd48a2b5cec507a9eb9b8c092ceba699f2a")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+4d8a7342c8a5345bad73a31c71f726614b85e1d8")]
 [assembly: System.Reflection.AssemblyProductAttribute("TokenAuth")]
 [assembly: System.Reflection.AssemblyTitleAttribute("TokenAuth")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

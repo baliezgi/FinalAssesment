@@ -11,7 +11,11 @@ namespace Management.Service.Services
     {
 
         Task<ResponseDto<List<ApartmentDto>>> GetApartment();
-        Task<ResponseDto<List<ApartmentDto>>> AddApartment(ApartmentDto apartmentDto);
+        Task<ResponseDto<List<ApartmentDto>>> GetApartmentByUserId(Guid userId);
+        Task<ResponseDto<ApartmentDto>> GetById(Guid id);
+        Task<ResponseDto<ApartmentDto>> AddApartment(ApartmentDto apartmentDto);
+        Task<ResponseDto<ApartmentDto>> UpdateApartment(Guid id, ApartmentDto apartmentDto);
+        Task<ResponseDto<bool>> DeleteApartment(Guid id);
 
     }
 }

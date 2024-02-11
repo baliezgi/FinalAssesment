@@ -15,6 +15,7 @@ namespace Management.Repository.Repositories
         public ApartmentRepository(AppDbContext context)
         {
             _context = context;
+
         }
 
         public async Task<List<Apartment>> GetApartment()
@@ -22,14 +23,42 @@ namespace Management.Repository.Repositories
             return await _context.Apartments.ToListAsync();
         }
 
-        public async Task<Guid> AddApartment(Apartment apartment)
+        public async Task<Apartment> GetApartmentById(Guid id)
         {
-            await _context.Apartments.AddAsync(apartment);
+           return await _context.Apartments.FirstOrDefaultAsync(x => x.Id == id);
+        }
+
+        public async Task<Apartment> GetApartmentByUserId(Guid userId)
+        {
+            return await _context.Apartments.FirstOrDefaultAsync(x => x.AppUserId == userId);
+        }
+
+        public async Task<Apartment> AddApartment(Apartment apartment)
+        {
+            _context.Apartments.Add(apartment);
             await _context.SaveChangesAsync();
-            return apartment.Id;
-            
+            return apartment;
+           
+        }
+
+        public async Task<bool> DeleteApartment(Guid id)
+        {
+            var apartment = await GetApartmentById(id);
+            _context.Apartments.Remove(apartment);
+            await _context.SaveChangesAsync();
+            return true;
+           
         }
 
 
+
+
+
+
+
+        public async Task<Apartment> UpdateApartment(Guid id, Apartment apartment)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

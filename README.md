@@ -79,12 +79,124 @@ collection paylaşım linki: [Apartman Yönetim Sistemi](https://dark-star-90151
 | `phoneNumber` | `string` | **Gerekli**.  |
 | `password` | `string` | **Gerekli**. Identity API password validation vardır. |
 
-#### Öğeyi getir
+
+#### Assign Role
 
 ```http
-  GET /api/items/${id}
+  POST /api/identity/AssignRole
 ```
 
-| Parametre | Tip     | Açıklama                       |
-| :-------- | :------- | :-------------------------------- |
-| `id`      | `string` | **Gerekli**. Çağrılacak öğenin anahtar değeri |
+| Parametre | Tip     | Açıklama                |
+| :-------- | :------- | :------------------------- |
+| `userId` | `Guid` | **Gerekli**. |
+| `roleName` | `string` | **Gerekli**. DaireSakini veya Yönetici  |
+
+
+#### Create Token
+
+```http
+  POST /api/identity/CreateToken
+```
+
+| Parametre | Tip     | Açıklama                |
+| :-------- | :------- | :------------------------- |
+| `tcNo` | `string` | **Gerekli**. |
+| `phoneNumber` | `string` | **Gerekli**.  |
+| `password` | `string` | **Gerekli**. Identity API password validation vardır. |
+
+### Apartment
+
+
+#### Get Apartments
+
+```http
+  GET /api/apartment/
+```
+
+| Parametre | Tip     | Açıklama                |
+| :-------- | :------- | :------------------------- |
+
+
+
+#### Add Apartment Info
+
+```http
+   POST /api/apartment/
+```
+
+| Parametre | Tip     | Açıklama                |
+| :-------- | :------- | :------------------------- |
+| `id` | `Guid` | **Gerekli**. |
+| `blokNo` | `int` | **Gerekli**.   |
+| `floor` | `int` | **Gerekli**. |
+| `doorNo` | `int` | **Gerekli**. |
+| `appUserId` | `Guid` | **Gerekli**. |
+
+
+#### Get Apartment Info by UserId
+
+```http
+  GET /api/apartment/user/{userId}
+```
+
+#### Get Apartment Info by ApartmentId
+
+```http
+  GET /api/apartment/{id}
+```
+#### Update Apartment Info by ApartmentId
+
+```http
+  POST /api/apartment/{id}
+```
+
+
+| Parametre | Tip     | Açıklama                |
+| :-------- | :------- | :------------------------- |
+| `id` | `Guid` | **Gerekli**. |
+| `blokNo` | `int` | **Gerekli**.   |
+| `floor` | `int` | **Gerekli**. |
+| `doorNo` | `int` | **Gerekli**. |
+| `appUserId` | `Guid` | **Gerekli**. |
+
+### Payment
+#### Get All Payments
+
+```http
+  GET /api/payment
+```
+#### Add Payments
+
+```http
+  POST /api/payment
+```
+
+| Parametre | Tip     | Açıklama                |
+| :-------- | :------- | :------------------------- |
+| `id` | `Guid` | **Gerekli**. |
+| `paymentDate` | `Date` | **Gerekli**.   |
+| `amount` | `decimal` | **Gerekli**. |
+
+#### GetById payment
+
+```http
+  GET /api/payment/{id}
+```
+#### Update payment
+
+```http
+  PUT /api/payment/{id}
+```
+| Parametre | Tip     | Açıklama                |
+| :-------- | :------- | :------------------------- |
+| `id` | `Guid` | **Gerekli**. |
+| `paymentDate` | `Date` | **Gerekli**.   |
+| `amount` | `decimal` | **Gerekli**. |
+
+#### Delete payment
+
+```http
+  DELETE /api/payment/{id}
+```
+
+

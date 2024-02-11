@@ -1,5 +1,5 @@
 
-# Apartman Yönetim Sistemi
+# Apartman/Site Yönetim Sistemi
 
 Bu projenin ne yaptığı ve kimin için olduğu hakkında kısa bir açıklama
 

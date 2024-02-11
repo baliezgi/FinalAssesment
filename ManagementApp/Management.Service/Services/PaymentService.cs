@@ -19,11 +19,14 @@ namespace Management.Service.Services
             _paymentRepository = paymentRepository;
         }
 
+
+        #region GetPayments
         public async Task<ResponseDto<List<PaymentDto>>> GetPayments()
         {
             var payments = await _paymentRepository.GetPayments();
             var paymentDtos = payments.Select(p => new PaymentDto
             {
+
                 Id = p.Id,
                 //PaymentType = p.PaymentType,
                 PaymentDate = p.PaymentDate,
@@ -34,6 +37,60 @@ namespace Management.Service.Services
             {
                 Data = paymentDtos
             };
+        } 
+        #endregion
+
+      
+        
+
+        public async Task<ResponseDto<PaymentDto>> GetPaymentById(Guid id)
+        {
+            var payment = await _paymentRepository.GetById(id);
+
+            var paymentDto = new PaymentDto
+            {
+                Id = payment.Id,
+                //PaymentType = payment.PaymentType,
+                PaymentDate = payment.PaymentDate,
+                Amount = payment.Amount
+            };
+
+            return new ResponseDto<PaymentDto>
+            {
+                Data = paymentDto
+            };
+           
         }
+
+       public async Task<ResponseDto<PaymentDto>> AddPayment(PaymentDto paymentDto)
+        {
+            var newPayment = new Payment
+            {
+                Id = Guid.NewGuid(),
+                //PaymentType = paymentDto.PaymentType,
+                PaymentDate = paymentDto.PaymentDate,
+                Amount = paymentDto.Amount
+            };
+            await _paymentRepository.AddPayment(newPayment);
+            return new ResponseDto<PaymentDto> { Data = paymentDto };
+        }
+
+        public async Task<ResponseDto<PaymentDto>> UpdatePayment(Guid id, PaymentDto paymentDto)
+        {
+            var payment = await _paymentRepository.GetById(id);
+            payment.Amount = paymentDto.Amount;
+            payment.PaymentDate = paymentDto.PaymentDate;
+            await _paymentRepository.UpdatePayment(id, payment);
+            return new ResponseDto<PaymentDto> { Data = paymentDto };
+        }
+
+        public async Task<ResponseDto<bool>> DeletePayment(Guid id)
+        {
+            return new ResponseDto<bool> { Data = await _paymentRepository.DeletePayment(id) };
+        }
+     
+
+
+
     }
 }

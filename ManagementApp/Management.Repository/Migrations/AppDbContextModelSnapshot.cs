@@ -24,11 +24,9 @@ namespace Management.Repository.Migrations
 
             modelBuilder.Entity("Management.Repository.Models.Apartment", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<Guid>("AppUserId")
                         .HasColumnType("uniqueidentifier");
@@ -158,18 +156,16 @@ namespace Management.Repository.Migrations
 
             modelBuilder.Entity("Management.Repository.Models.Payment", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<decimal>("Amount")
                         .HasPrecision(18, 2)
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<int>("ApartmentId")
-                        .HasColumnType("int");
+                    b.Property<Guid>("ApartmentId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<Guid>("AppUserId")
                         .HasColumnType("uniqueidentifier");

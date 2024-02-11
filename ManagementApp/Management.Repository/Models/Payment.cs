@@ -4,7 +4,7 @@ namespace Management.Repository.Models
 {
     public class Payment
     {
-        public int Id { get; set; }
+        public Guid Id { get; set; }
         public PaymentType PaymentType { get; set; }
         public DateTime PaymentDate { get; set; }
         public int Year { get; set; }
@@ -19,7 +19,7 @@ namespace Management.Repository.Models
 
 
         // Apartment to payment: 1 to many
-        public int ApartmentId { get; set; }
+        public Guid ApartmentId { get; set; }
         public Apartment? Apartment { get; set; }
     }
 

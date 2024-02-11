@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Management.Repository.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20240210212927_bismillah2")]
-    partial class bismillah2
+    [Migration("20240211150841_bismillah")]
+    partial class bismillah
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -27,13 +27,34 @@ namespace Management.Repository.Migrations
 
             modelBuilder.Entity("Management.Repository.Models.Apartment", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("AppUserId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<int>("BlokNo")
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                    b.Property<int>("DoorNo")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Floor")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Status")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Type")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("AppUserId")
+                        .IsUnique();
 
                     b.ToTable("Apartments");
                 });
@@ -138,15 +159,19 @@ namespace Management.Repository.Migrations
 
             modelBuilder.Entity("Management.Repository.Models.Payment", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<decimal>("Amount")
                         .HasPrecision(18, 2)
                         .HasColumnType("decimal(18,2)");
+
+                    b.Property<Guid>("ApartmentId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("AppUserId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<int>("Month")
                         .HasColumnType("int");
@@ -154,10 +179,17 @@ namespace Management.Repository.Migrations
                     b.Property<DateTime>("PaymentDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<int>("PaymentType")
+                        .HasColumnType("int");
+
                     b.Property<int>("Year")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("ApartmentId");
+
+                    b.HasIndex("AppUserId");
 
                     b.ToTable("Payments");
                 });
@@ -265,6 +297,36 @@ namespace Management.Repository.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
+            modelBuilder.Entity("Management.Repository.Models.Apartment", b =>
+                {
+                    b.HasOne("Management.Repository.Models.AppUser", "AppUser")
+                        .WithOne("Apartment")
+                        .HasForeignKey("Management.Repository.Models.Apartment", "AppUserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("AppUser");
+                });
+
+            modelBuilder.Entity("Management.Repository.Models.Payment", b =>
+                {
+                    b.HasOne("Management.Repository.Models.Apartment", "Apartment")
+                        .WithMany("Payments")
+                        .HasForeignKey("ApartmentId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("Management.Repository.Models.AppUser", "AppUser")
+                        .WithMany("Payment")
+                        .HasForeignKey("AppUserId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.Navigation("Apartment");
+
+                    b.Navigation("AppUser");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<System.Guid>", b =>
                 {
                     b.HasOne("Management.Repository.Models.AppRole", null)
@@ -314,6 +376,18 @@ namespace Management.Repository.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("Management.Repository.Models.Apartment", b =>
+                {
+                    b.Navigation("Payments");
+                });
+
+            modelBuilder.Entity("Management.Repository.Models.AppUser", b =>
+                {
+                    b.Navigation("Apartment");
+
+                    b.Navigation("Payment");
                 });
 #pragma warning restore 612, 618
         }

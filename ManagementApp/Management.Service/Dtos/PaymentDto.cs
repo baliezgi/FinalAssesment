@@ -9,7 +9,7 @@ namespace Management.Service.Dtos
 {
     public class PaymentDto
     {
-        public int Id { get; set; }
+        public Guid Id { get; set; }
         //public string PaymentType { get; set; }
         public DateTime PaymentDate { get; set; }
         [Precision(18, 2)]

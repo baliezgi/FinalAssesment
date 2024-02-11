@@ -8,7 +8,7 @@ namespace Management.Repository.Models
 {
     public class Apartment
     {
-        public int Id { get; set; }=default!;
+        public Guid Id { get; set; }=default!;
         public int BlokNo { get; set; }
         public int Floor { get; set; }
         public int DoorNo { get; set; }

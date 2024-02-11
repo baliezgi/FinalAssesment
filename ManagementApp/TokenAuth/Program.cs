@@ -15,6 +15,8 @@ builder.Services.AddScoped<IdentitiyService>();
 builder.Services.AddScoped<TokenService>();
 builder.Services.AddScoped<IPaymentService, PaymentService>();
 builder.Services.AddScoped<IPaymentRepository, PaymentRepository>();
+builder.Services.AddScoped<IApartmentService, ApartmentService>();
+builder.Services.AddScoped<IApartmentRepository, ApartmentRepository>();
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();

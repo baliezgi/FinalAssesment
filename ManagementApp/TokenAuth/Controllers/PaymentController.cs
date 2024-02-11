@@ -28,21 +28,56 @@ namespace TokenAuth.Controllers
             }
             return Ok(result);
         }
+
+        [HttpGet("{id}")]
+        public async Task<ActionResult<PaymentDto>> GetPaymentById(Guid id)
+        {
+            var result = await _paymentService.GetPaymentById(id);
+            if (result.AnyError)
+            {
+                return BadRequest(result);
+            }
+            return Ok(result);
+        }
         
 
       //  [Authorize(Roles ="yönetici")]
         [HttpPost]
-        public IActionResult Add()
+        public async Task<ActionResult<PaymentDto>> AddPayment(PaymentDto paymentDto)
         {
-            return Ok("Payment added");
+            var result = await _paymentService.AddPayment(paymentDto);
+            if (result.AnyError)
+            {
+                return BadRequest(result);
+            }
+            return Ok(result);
         }
 
         //[Authorize(Roles="DaireSakini")]
-        [HttpPut]
-        public IActionResult Update()
+        [HttpPut("{id}")]
+       public async Task<ActionResult<PaymentDto>> UpdatePayment(Guid id, PaymentDto paymentDto)
         {
-            return Ok("Payment updated");
+            var result = await _paymentService.UpdatePayment(id, paymentDto);
+            if (result.AnyError)
+            {
+                return BadRequest(result);
+            }
+            return Ok(result);
         }
+
+
+        [HttpDelete("{id}")]
+        public async Task<ActionResult<PaymentDto>> Delete()
+        {
+            var result = await _paymentService.GetPayments();
+            if (result.AnyError)
+            {
+                return BadRequest(result);
+            }
+            return Ok(result);
+        }
+
+
 
 
     }

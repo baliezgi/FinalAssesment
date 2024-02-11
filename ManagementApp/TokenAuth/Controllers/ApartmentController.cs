@@ -38,12 +38,12 @@ namespace TokenAuth.Controllers
         }
 
 
-        [HttpDelete("{id}")]
-        public async Task<ActionResult<ResponseDto<bool>>> DeleteApartment(Guid id)
-        {
-            var response = await _apartmentService.DeleteApartment(id);
-            return Ok(response);
-        }
+        //[HttpDelete("{id}")]
+        //public async Task<ActionResult<ResponseDto<bool>>> DeleteApartment(Guid id)
+        //{
+        //    var response = await _apartmentService.DeleteApartment(id);
+        //    return Ok(response);
+        //}
 
         [HttpGet("{id}")]
         public async Task<ActionResult<ResponseDto<ApartmentDto>>> GetApartmentById(Guid id)

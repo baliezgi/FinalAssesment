@@ -6,7 +6,8 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace TokenAuth.Controllers
 {
-    //[Authorize]
+    // [Authorize for yonetici and daire sakini]
+    [Authorize(Roles = "Yonetici,DaireSakini")]
     [Route("api/[controller]")]
     [ApiController]
     public class PaymentController : ControllerBase
@@ -17,7 +18,7 @@ namespace TokenAuth.Controllers
             _paymentService = paymentService;
         }
 
-
+        [Authorize(Roles = "Yonetici")]
         [HttpGet]
         public async Task<ActionResult<List<PaymentDto>>> GetPayments()
         {
@@ -40,8 +41,6 @@ namespace TokenAuth.Controllers
             return Ok(result);
         }
         
-
-      //  [Authorize(Roles ="yönetici")]
         [HttpPost]
         public async Task<ActionResult<PaymentDto>> AddPayment(PaymentDto paymentDto)
         {
@@ -52,8 +51,7 @@ namespace TokenAuth.Controllers
             }
             return Ok(result);
         }
-
-        //[Authorize(Roles="DaireSakini")]
+        [Authorize(Roles = "Yonetici")]
         [HttpPut("{id}")]
        public async Task<ActionResult<PaymentDto>> UpdatePayment(Guid id, PaymentDto paymentDto)
         {
@@ -65,7 +63,7 @@ namespace TokenAuth.Controllers
             return Ok(result);
         }
 
-
+        [Authorize(Roles = "Yonetici")]
         [HttpDelete("{id}")]
         public async Task<ActionResult<PaymentDto>> Delete()
         {

@@ -1,10 +1,12 @@
 ﻿using Management.Service.Dtos;
 using Management.Service.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace TokenAuth.Controllers
 {
+    [Authorize(Roles = "Yonetici")]
     [Route("api/[controller]")]
     [ApiController]
     public class ApartmentController : ControllerBase

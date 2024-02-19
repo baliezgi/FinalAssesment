@@ -1,17 +1,19 @@
 ﻿using Management.Service.Dtos;
 using Management.Service.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using TokenAuth.Services;
 
 namespace TokenAuth.Controllers
 {
+    
     [Route("api/[controller]")]
     [ApiController]
     public class IdentityController(IdentitiyService identitiyService, TokenService tokenService) : ControllerBase
     {
 
-
-       [HttpPost("CreateUser")]
+        [Authorize(Roles = "Yonetici")]
+        [HttpPost("CreateUser")]
        public async Task<IActionResult> CreateUser(UserCreateDto user)
         {
             var result = await identitiyService.CreateUser(user);
@@ -34,6 +36,7 @@ namespace TokenAuth.Controllers
             return Created("", result);
         }
 
+       [Authorize(Roles = "Yonetici")]
         [HttpPost("AssignRole")]
         public async Task<IActionResult> AssignRole(RoleCreateRequestDto request)
         {
